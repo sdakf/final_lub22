@@ -15,6 +15,7 @@ public class CategoryDao {//Dao- Data Access Object
     }
 
     private static CategoryDao INSTANCE;
+    private final List<Category> categoryList = populateCategories();
 
     public static CategoryDao getInstance() {
         if (INSTANCE == null) {
@@ -27,7 +28,19 @@ public class CategoryDao {//Dao- Data Access Object
         return INSTANCE;
     }
 
-    private void populateCategories(){
+    private List<Category> populateCategories() {
+        List<String> lines = readCategoriesFromFile();
+        List<Category> categories = lines.stream()
+                .map(x -> Category.createFromText(x))
+                .collect(Collectors.toList());
+
+        Map<Integer, List<Category>> categoriesMap = populateMap(categories);
+
+        populateParentId(1, categoriesMap);
+        return categories;
+    }
+
+    private List<String> readCategoriesFromFile() {
         ClassLoader classLoader = this.getClass().getClassLoader();
         URL resource = classLoader.getResource("kategorie.txt");
         List<String> lines;
@@ -37,16 +50,44 @@ public class CategoryDao {//Dao- Data Access Object
             e.printStackTrace();
             lines = Collections.EMPTY_LIST;
         }
-        List<Category> categories = lines.stream()
-                .map(x -> Category.createFromText(x))
-                .collect(Collectors.toList());
+        return lines;
+    }
+
+    private void populateParentId(int depth, Map<Integer, List<Category>> categoriesMap) {
+        List<Category> childrenList = categoriesMap.get(depth);
+        if (childrenList == null) {
+            return;
+        }
+        List<Category> parentList = categoriesMap.get(depth - 1);
+        for (Category child : childrenList) {
+            Integer parentId = parentList.stream()
+                    .map(c -> c.getId())
+                    .filter(id -> id < child.getId())
+                    .sorted((a, b) -> b - a)
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException());
+            child.applyParentId(parentId);
+        }
+        populateParentId(depth + 1, categoriesMap);
+    }
+
+    private Map<Integer, List<Category>> populateMap(List<Category> categories) {
         Map<Integer, List<Category>> categoriesMap = new HashMap<>();
         for (Category category : categories) {
-            List<Category> innerList = new ArrayList<>();
-            innerList.add(category);
-            categoriesMap.put(category.getDepth(), innerList);
+            if (categoriesMap.containsKey(category.getDepth())) {
+                List<Category> innerList = categoriesMap.get(category.getDepth());
+                innerList.add(category);
+            } else {
+                List<Category> innerList = new ArrayList<>();
+                innerList.add(category);
+                categoriesMap.put(category.getDepth(), innerList);
+            }
         }
+        return categoriesMap;
     }
 
 
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
 }

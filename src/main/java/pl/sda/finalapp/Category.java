@@ -19,12 +19,22 @@ public class Category {
 
     public static Category createFromText(String text){
         Category category = new Category();
-        category.categoryName = text;
+        category.categoryName = text.trim();
         category.id = ++counter;
-        category.depth = text.split("\\S+")[0].length();
+        category.depth = calculateDepth(text);
         return category;
     }
 
+    private static int calculateDepth(String text) {
+        if(text.startsWith(" ")){
+            return text.split("\\S+")[0].length();
+        }
+        return 0;
+
+    }
 
 
+    public void applyParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 }
