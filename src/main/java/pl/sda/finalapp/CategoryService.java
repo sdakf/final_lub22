@@ -35,4 +35,8 @@ public class CategoryService {
                     openAllParents(dto.getParentId(), potentialParents);
                 });
     }
+
+    public void addCategory(String categoryName, Integer parentId) {
+        categoryDao.addCategory(categoryName, parentId);
+    }
 }

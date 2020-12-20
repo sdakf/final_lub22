@@ -17,7 +17,11 @@
 </form>
 <div id="container"></div>
 <hr>
-
+<form method="post" action="/addCategory">
+    <input type="text" name="categoryName">
+    <input type="number" name="parentId">
+    <button>Dodaj</button>
+</form>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
@@ -49,6 +53,7 @@
     });
 </script>
 <!--<div th:replace="fragments/footer :: footer"></div>-->
+
 <footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>

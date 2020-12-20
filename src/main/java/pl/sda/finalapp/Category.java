@@ -25,6 +25,14 @@ public class Category {
         return category;
     }
 
+    public static Category createFromNameAndParentId(String text, Integer parentId){
+        Category category = new Category();
+        category.categoryName = text.trim();
+        category.id = ++counter;
+        category.parentId = parentId;
+        return category;
+    }
+
     private static int calculateDepth(String text) {
         if (text.startsWith(" ")) {
             return text.split("\\S+")[0].length();

@@ -90,4 +90,16 @@ public class CategoryDao {//Dao- Data Access Object
     public List<Category> getCategoryList() {
         return categoryList;
     }
+
+    public void addCategory(String categoryName, Integer parentId) {
+        if(thereIsNoCategoryWithId(parentId)) {
+            throw new RuntimeException();
+        }
+        categoryList.add(Category.createFromNameAndParentId(categoryName, parentId));
+    }
+
+    private boolean thereIsNoCategoryWithId(Integer parentId) {
+        return categoryList.stream()
+                .noneMatch(c -> c.getId().equals(parentId));
+    }
 }
