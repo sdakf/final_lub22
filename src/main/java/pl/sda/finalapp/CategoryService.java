@@ -25,8 +25,11 @@ public class CategoryService {
     }
 
     private void openAllParents(Integer parentId, List<CategoryDto> potentialParents) {
+        if (parentId == null) {
+            return;
+        }
         potentialParents.stream()
-                .filter(dto -> dto.getParentId().equals(parentId))
+                .filter(dto -> parentId.equals(dto.getId()))
                 .forEach(dto -> {
                     dto.applyOpen(true);
                     openAllParents(dto.getParentId(), potentialParents);
