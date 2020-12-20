@@ -1,4 +1,4 @@
-package pl.sda.finalapp;
+package pl.sda.finalapp.categories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

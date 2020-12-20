@@ -2,6 +2,8 @@ package pl.sda.finalapp;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.sda.finalapp.categories.Category;
+import pl.sda.finalapp.categories.CategoryDao;
 
 import java.util.List;
 

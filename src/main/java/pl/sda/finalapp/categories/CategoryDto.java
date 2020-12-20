@@ -1,4 +1,4 @@
-package pl.sda.finalapp;
+package pl.sda.finalapp.categories;
 
 
 public class CategoryDto {
