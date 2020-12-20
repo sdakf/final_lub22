@@ -17,7 +17,7 @@ public class Category {
     private Integer depth;
     private static Integer counter = 0;
 
-    public static Category createFromText(String text){
+    public static Category createFromText(String text) {
         Category category = new Category();
         category.categoryName = text.trim();
         category.id = ++counter;
@@ -26,15 +26,21 @@ public class Category {
     }
 
     private static int calculateDepth(String text) {
-        if(text.startsWith(" ")){
+        if (text.startsWith(" ")) {
             return text.split("\\S+")[0].length();
         }
         return 0;
 
     }
 
-
     public void applyParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public CategoryDto toDto() {
+        return new CategoryDto(
+                this.id,
+                this.categoryName,
+                this.parentId);
     }
 }
