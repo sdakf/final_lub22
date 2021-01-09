@@ -3,6 +3,9 @@ package pl.sda.finalapp.categories;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -50,5 +53,8 @@ public class Category {
                 this.id,
                 this.categoryName,
                 this.parentId);
+    }
+    public void changeParent(Integer newParent) {
+        this.parentId = newParent;
     }
 }

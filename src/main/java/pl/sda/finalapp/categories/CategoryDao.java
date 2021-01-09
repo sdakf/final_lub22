@@ -2,6 +2,7 @@ package pl.sda.finalapp.categories;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -42,7 +43,7 @@ public class CategoryDao {//Dao- Data Access Object
 
     private List<String> readCategoriesFromFile() {
         ClassLoader classLoader = this.getClass().getClassLoader();
-        URL resource = classLoader.getResource("kategorie.txt");
+        URL resource = classLoader.getResource("categories.txt");
         List<String> lines;
         try {
             lines = Files.readAllLines(Paths.get(resource.toURI()));
@@ -101,5 +102,13 @@ public class CategoryDao {//Dao- Data Access Object
     private boolean thereIsNoCategoryWithId(Integer parentId) {
         return categoryList.stream()
                 .noneMatch(c -> c.getId().equals(parentId));
+    }
+
+    public Category findCategoryById(Integer id){
+        return getCategoryList().stream()
+                .filter(c -> id.equals(c.getId()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException());
+
     }
 }

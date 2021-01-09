@@ -50,6 +50,7 @@ public class CategoryDto {
         return new CategoryState(this.open, this.selected);
     }
 
+
 }
 
 class CategoryState{

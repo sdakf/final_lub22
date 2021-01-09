@@ -39,4 +39,31 @@ public class CategoryService {
     public void addCategory(String categoryName, Integer parentId) {
         categoryDao.addCategory(categoryName, parentId);
     }
+
+    public void changeParent(Integer newParent, Integer categoryId) {
+        if (newParent == null) {
+            Category categoryById = categoryDao.findCategoryById(categoryId);
+            categoryById.changeParent(newParent);
+        } else {
+            List<Category> daoCategoryList = categoryDao.getCategoryList();
+
+            boolean isNewParentExists = daoCategoryList.stream()
+                    .anyMatch(c -> newParent.equals(c.getId()));
+
+            if (isNewParentExists) {
+                Category category = daoCategoryList.stream()
+                        .filter(c -> categoryId.equals(c.getId()))
+                        .findFirst()
+                        .orElseThrow(() -> new RuntimeException());
+
+                List<Category> categoriesWithGivenParentId = daoCategoryList.stream()
+                        .filter(c -> categoryId.equals(c.getParentId()))
+                        .collect(Collectors.toList());
+
+                categoriesWithGivenParentId.forEach(c -> c.changeParent(category.getParentId()));
+
+                category.changeParent(newParent);
+            }
+        }
+    }
 }
