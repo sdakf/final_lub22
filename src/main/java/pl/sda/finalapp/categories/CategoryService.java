@@ -3,6 +3,7 @@ package pl.sda.finalapp.categories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,7 +43,8 @@ public class CategoryService {
 
     public void changeParent(Integer newParent, Integer categoryId) {
         if (newParent == null) {
-            Category categoryById = categoryDao.findCategoryById(categoryId);
+            Category categoryById = categoryDao.findCategoryById(categoryId)
+                    .orElseThrow();
             categoryById.changeParent(newParent);
         } else {
             List<Category> daoCategoryList = categoryDao.getCategoryList();
@@ -65,5 +67,10 @@ public class CategoryService {
                 category.changeParent(newParent);
             }
         }
+    }
+
+    public Optional<String> findCategoryNameById(Integer categoryId) {
+        return categoryDao.findCategoryById(categoryId)
+                .map(c -> c.getCategoryName());
     }
 }

@@ -2,8 +2,17 @@ package pl.sda.finalapp.products;
 
 public enum ProductType {
 
-    GAME,
-    BOOK,
-    PRESS
+    GAME("Gra"),
+    BOOK("Książka"),
+    PRESS("Gazeta");
 
+    private String plName;
+
+    ProductType(String plName) {
+        this.plName = plName;
+    }
+
+    public String getPlName() {
+        return plName;
+    }
 }

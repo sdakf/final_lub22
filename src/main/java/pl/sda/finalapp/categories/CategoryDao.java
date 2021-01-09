@@ -104,11 +104,10 @@ public class CategoryDao {//Dao- Data Access Object
                 .noneMatch(c -> c.getId().equals(parentId));
     }
 
-    public Category findCategoryById(Integer id){
+    public Optional<Category> findCategoryById(Integer id){
         return getCategoryList().stream()
                 .filter(c -> id.equals(c.getId()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException());
+                .findFirst();
 
     }
 }
