@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+    <form method="post" th:action="@{/register}" th:object="${registrationUserDto}">
+        <input th:field="*{firstName}" placeholder="firstName"><br/>
+        <p th:text="${firstNameError}" th:if="${firstNameError}"></p>
+
+        <input th:field="*{lastName}" placeholder="lastName"><br/>
+
+        <input th:field="*{eMail}" placeholder="eMail"><br/>
+
+        <input th:field="*{password}" placeholder="password"><br/>
+
+        <input th:field="*{city}" placeholder="city"><br/>
+
+        <select th:field="*{country}">
+            <option th:value="''">Wybierz</option>
+            <option th:each="country : ${countryList}"
+                    th:value="${country.symbol}"
+                    th:text="${country.plName}"></option>
+        </select><br/>
+
+        <input th:field="*{zipCode}" placeholder="zipCode"><br/>
+
+        <input th:field="*{street}" placeholder="street"><br/>
+
+        <input th:field="*{birthDate}" placeholder="birthDate"><br/>
+
+        <input th:field="*{pesel}" placeholder="pesel"><br/>
+
+        <input th:field="*{phone}" placeholder="phone"><br/>
+
+        <input th:field="*{preferEmails}" placeholder="preferEmails"><br/>
+
+        <button>Utwórz konto</button>
+    </form>
+</body>
+</html>

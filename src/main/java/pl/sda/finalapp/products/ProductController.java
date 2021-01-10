@@ -21,7 +21,7 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    @GetMapping// todo dodac wyszukiwanie po kategorii
     String productList(@RequestParam(value = "query", required = false) String query,
                        @RequestParam(value = "productType", required = false) ProductType productType,
                        Model model) {
@@ -51,6 +51,8 @@ public class ProductController {
             return "redirect:/products";
         }
         model.addAttribute("product", productById.get());
+        model.addAttribute("productTypeList", ProductType.values());
+        model.addAttribute("categoryWithIdDtoList", categoryService.prepareCategoriesWithId());
         return "editProductPage";
     }
 
