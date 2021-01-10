@@ -40,5 +40,14 @@
         <td>Edytuj</td>
     </tr>
 </table>
+<hr>
+<form method="post" th:action="@{/products}">
+    <input name="title" placeholder="title">
+    <input name="pictureUrl" placeholder="pictureUrl">
+    <input name="price" type="number" step="0.01" placeholder="price">
+    <input name="productType" placeholder="productType">
+    <input name="categoryId" placeholder="categoryId">
+    <button>Dodaj</button>
+</form>
 </body>
 </html>

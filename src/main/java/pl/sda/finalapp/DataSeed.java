@@ -3,7 +3,6 @@ package pl.sda.finalapp;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sda.finalapp.categories.CategoryDto;
 import pl.sda.finalapp.categories.CategoryService;
 import pl.sda.finalapp.products.Product;
 import pl.sda.finalapp.products.ProductRepository;
