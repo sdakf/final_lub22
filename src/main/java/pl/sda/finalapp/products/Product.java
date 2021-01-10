@@ -37,6 +37,16 @@ public class Product {
                 categoryName);
     }
 
+    public static Product fromDto(ProductDto dto){
+        Product product = new Product();
+        product.title = dto.getTitle();
+        product.pictureUrl = dto.getPictureUrl();
+        product.price = dto.getPrice();
+        product.productType = dto.getProductType();
+        product.categoryId = dto.getCategoryId();
+        return product;
+    }
+
     public Integer getCategoryId() {
         return categoryId;
     }

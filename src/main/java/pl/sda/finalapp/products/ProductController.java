@@ -30,13 +30,15 @@ public class ProductController {
         return "productsPage";
     }
 
-    @PostMapping("/products")
+    @PostMapping("/products")//todo wprowadzenie dropdownów dla productType i categoryID
     String addProduct(@RequestParam String title,
                       @RequestParam String pictureUrl,
                       @RequestParam BigDecimal price,
                       @RequestParam ProductType productType,
                       @RequestParam Integer categoryId){
-        return "";
+        ProductDto dto = new ProductDto(title, pictureUrl, price, productType, categoryId);
+        productService.addProduct(dto);
+        return "redirect:/products";
     }
 
 

@@ -12,6 +12,7 @@ public class Plane extends Vehicle {
         this.planeNr = planeNr;
     }
 
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -25,6 +26,7 @@ public class Plane extends Vehicle {
         return false;
     }
 
+    @Override
     public int hashCode(){
         return this.planeNr;
     }

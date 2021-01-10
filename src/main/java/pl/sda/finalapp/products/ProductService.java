@@ -41,4 +41,9 @@ public class ProductService {
     private String createErrorText(Product p) {
         return "BŁĄD " + p.getCategoryId();
     }
+
+    public void addProduct(ProductDto dto) {
+        Product product = Product.fromDto(dto);
+        productRepository.save(product);
+    }
 }
