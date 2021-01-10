@@ -37,7 +37,10 @@
         <td th:text="${p.price}"></td>
         <td th:text="${p.productType}"></td>
         <td th:text="${p.categoryName}"></td>
-        <td>Edytuj</td>
+        <td>
+            <a th:href="@{'/products/' + ${p.id}}">Edytuj</a>
+        </td>
+<!--        <td><a th:href="@{/products/{id}(id=${p.id})}">Edytuj</a></td>-->
     </tr>
 </table>
 <hr>
@@ -45,8 +48,22 @@
     <input name="title" placeholder="title">
     <input name="pictureUrl" placeholder="pictureUrl">
     <input name="price" type="number" step="0.01" placeholder="price">
-    <input name="productType" placeholder="productType">
-    <input name="categoryId" placeholder="categoryId">
+    <select name="productType">
+        <option value="" th:text="Wybierz"></option>
+        <option
+                th:each="type : ${productTypes}"
+                th:value="${type}"
+                th:text="${type.plName}">
+        </option>
+    </select>
+    <select name="categoryId">
+        <option value="" th:text="Wybierz"></option>
+        <option
+                th:each="category : ${categoriesWithId}"
+                th:value="${category.id}"
+                th:text="${category.idWithName}">
+        </option>
+    </select>
     <button>Dodaj</button>
 </form>
 </body>

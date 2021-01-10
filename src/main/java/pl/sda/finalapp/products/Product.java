@@ -28,13 +28,22 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public ProductListDto toDto(String categoryName) {
+    public ProductListDto toListDto(String categoryName) {
         return new ProductListDto(this.id,
                 this.title,
                 this.pictureUrl,
                 this.price,
                 this.productType,
                 categoryName);
+    }
+
+    public ProductDto toDto() {
+        return new ProductDto(this.id,
+                this.title,
+                this.pictureUrl,
+                this.price,
+                this.productType,
+                this.categoryId);
     }
 
     public static Product fromDto(ProductDto dto){
@@ -49,5 +58,13 @@ public class Product {
 
     public Integer getCategoryId() {
         return categoryId;
+    }
+
+    public void apply(ProductDto dto) {
+        this.title = dto.getTitle();
+        this.pictureUrl = dto.getPictureUrl();
+        this.price = dto.getPrice();
+        this.productType = dto.getProductType();
+        this.categoryId = dto.getCategoryId();
     }
 }

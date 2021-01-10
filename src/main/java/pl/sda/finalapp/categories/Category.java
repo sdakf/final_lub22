@@ -57,4 +57,8 @@ public class Category {
     public void changeParent(Integer newParent) {
         this.parentId = newParent;
     }
+
+    public CategoryWithIdDto toCategoryWithIdDto() {
+        return new CategoryWithIdDto(this.id, this.categoryName);
+    }
 }

@@ -73,4 +73,10 @@ public class CategoryService {
         return categoryDao.findCategoryById(categoryId)
                 .map(c -> c.getCategoryName());
     }
+
+    public List<CategoryWithIdDto> prepareCategoriesWithId() {
+        return categoryDao.getCategoryList().stream()
+                .map(c -> c.toCategoryWithIdDto())
+                .collect(Collectors.toList());
+    }
 }

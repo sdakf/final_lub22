@@ -11,6 +11,14 @@ public class ProductDto {
     private ProductType productType;
     private Integer categoryId;
 
+    public ProductDto() {
+    }
+
+    public ProductDto(Integer id, String title, String pictureUrl, BigDecimal price, ProductType productType, Integer categoryId) {
+        this(title, pictureUrl, price, productType, categoryId);
+        this.id = id;
+    }
+
     public ProductDto(String title, String pictureUrl, BigDecimal price, ProductType productType, Integer categoryId) {
         this.title = title;
         this.pictureUrl = pictureUrl;
@@ -41,5 +49,29 @@ public class ProductDto {
 
     public Integer getCategoryId() {
         return categoryId;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }

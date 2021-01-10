@@ -2,24 +2,26 @@ package pl.sda.finalapp.products;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.sda.finalapp.categories.CategoryService;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Controller
-@RequestMapping
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    private final CategoryService categoryService;
+
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
-    @GetMapping("/products")
+    @GetMapping
     String productList(@RequestParam(value = "query", required = false) String query,
                        @RequestParam(value = "productType", required = false) ProductType productType,
                        Model model) {
@@ -27,10 +29,11 @@ public class ProductController {
         model.addAttribute("searchText", query);
         model.addAttribute("productType", productType);
         model.addAttribute("productTypes", ProductType.values());
+        model.addAttribute("categoriesWithId", categoryService.prepareCategoriesWithId());
         return "productsPage";
     }
 
-    @PostMapping("/products")//todo wprowadzenie dropdownów dla productType i categoryID
+    @PostMapping
     String addProduct(@RequestParam String title,
                       @RequestParam String pictureUrl,
                       @RequestParam BigDecimal price,
@@ -40,6 +43,23 @@ public class ProductController {
         productService.addProduct(dto);
         return "redirect:/products";
     }
+
+    @GetMapping("/{id}")
+    String editProductForm(@PathVariable Integer id, Model model){
+        Optional<ProductDto> productById = productService.findProductById(id);
+        if(productById.isEmpty()){
+            return "redirect:/products";
+        }
+        model.addAttribute("product", productById.get());
+        return "editProductPage";
+    }
+
+    @PostMapping("/{id}")//todo security check if id != product.id
+    String editProduct(@ModelAttribute ProductDto product, @PathVariable Integer id){
+        productService.update(product);
+        return "redirect:/products";
+    }
+
 
 
 }
