@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <div th:replace="/fragments/header :: header-css"></div>
+
 </head>
 <body>
-    <p th:text="${txt}"></p>
+<div th:replace="/fragments/header :: headerFragment"></div>
+
+    Hello world!
 </body>
 </html>

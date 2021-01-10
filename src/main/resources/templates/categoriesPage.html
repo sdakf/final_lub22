@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <title>Categories</title>
     <!-- 2 load the theme CSS file -->
-    <!--        <div th:replace="fragments/header :: header-css"/>-->
+            <div th:replace="fragments/header :: header-css"/>
+
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 </head>
 <body>
-<!--<div th:replace="/fragments/header :: headerFragment">-->
+<div th:replace="/fragments/header :: headerFragment">
 </div>
 <form action="/categories">
     <input type="text" name="searchText" th:value="${searchText}">

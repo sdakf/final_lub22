@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <div th:replace="/fragments/header :: header-css"></div>
 </head>
 <body>
+    <div th:replace="/fragments/header :: headerFragment"></div>
+
 <form action="/products">
     <input type="text" name="query" th:value="${searchText}">
     <select name="productType">
