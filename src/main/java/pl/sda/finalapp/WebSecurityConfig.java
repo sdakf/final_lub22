@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/products/**").hasAnyAuthority("ROLE_" + Role.ADMIN) //na dany url moga wejsc osoby zalogowane i z danym authority
+                .antMatchers("/products/**").hasAnyAuthority("ROLE_ADMIN") //na dany url moga wejsc osoby zalogowane i z danym authority
 //                .antMatchers("/products/**").hasAnyRole(Role.ADMIN)
                 .antMatchers("/login", "/register").permitAll() //wpuszczamy wszystkich na dane urle
                 .antMatchers("/css/**").permitAll()

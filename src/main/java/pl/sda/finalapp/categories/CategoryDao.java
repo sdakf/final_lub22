@@ -41,7 +41,7 @@ public class CategoryDao {//Dao- Data Access Object
 
     private List<String> readCategoriesFromFile() {
         try {
-            return Resources.readLines(Resources.getResource("categories.txt"), Charset.forName("UNICODE"));
+            return Resources.readLines(Resources.getResource("categories.txt"), Charset.forName("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
             return Collections.emptyList();
