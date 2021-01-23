@@ -1,12 +1,10 @@
 package pl.sda.finalapp.categories;
 
 
+import com.google.common.io.Resources;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,16 +40,12 @@ public class CategoryDao {//Dao- Data Access Object
     }
 
     private List<String> readCategoriesFromFile() {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        URL resource = classLoader.getResource("categories.txt");
-        List<String> lines;
         try {
-            lines = Files.readAllLines(Paths.get(resource.toURI()));
-        } catch (IOException | URISyntaxException e) {
+            return Resources.readLines(Resources.getResource("kategorie.txt"), Charset.forName("UNICODE"));
+        } catch (IOException e) {
             e.printStackTrace();
-            lines = Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
-        return lines;
     }
 
     private void populateParentId(int depth, Map<Integer, List<Category>> categoriesMap) {
@@ -93,7 +87,7 @@ public class CategoryDao {//Dao- Data Access Object
     }
 
     public void addCategory(String categoryName, Integer parentId) {
-        if(thereIsNoCategoryWithId(parentId)) {
+        if (thereIsNoCategoryWithId(parentId)) {
             throw new RuntimeException();
         }
         categoryList.add(Category.createFromNameAndParentId(categoryName, parentId));
@@ -104,7 +98,7 @@ public class CategoryDao {//Dao- Data Access Object
                 .noneMatch(c -> c.getId().equals(parentId));
     }
 
-    public Optional<Category> findCategoryById(Integer id){
+    public Optional<Category> findCategoryById(Integer id) {
         return getCategoryList().stream()
                 .filter(c -> id.equals(c.getId()))
                 .findFirst();
