@@ -13,7 +13,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String eMail;
-    private String password;
+    private String passwordHash;
     private String city;
     private String country;
     private String zipCode;
@@ -29,11 +29,11 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String eMail, String password, String city, String country, String zipCode, String street, String birthDate, String pesel, String phone, boolean preferEmails) {
+    public User(String firstName, String lastName, String eMail, String passwordHash, String city, String country, String zipCode, String street, String birthDate, String pesel, String phone, boolean preferEmails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.city = city;
         this.country = country;
         this.zipCode = zipCode;
@@ -44,11 +44,11 @@ public class User {
         this.preferEmails = preferEmails;
     }
 
-    public static User fromDto(RegistrationUserDto dto){
+    public static User fromDto(RegistrationUserDto dto, String passwordHash){
         return new User(dto.getFirstName(),
                 dto.getLastName(),
                 dto.getEMail(),
-                dto.getPassword().hashCode() + "",
+                passwordHash,
                 dto.getCity(),
                 dto.getCountry(),
                 dto.getZipCode(),

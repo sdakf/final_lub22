@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Map;
 
 @Controller
-public class UserController {
+public class RegisterUserController {
 
     @Autowired
     private RegistrationValidator registrationValidator;
@@ -45,5 +45,7 @@ public class UserController {
         model.addAllAttributes(errorMap);
         return "registerPage";
     }
+
+
 
 }
