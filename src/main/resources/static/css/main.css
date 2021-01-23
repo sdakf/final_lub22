@@ -65,3 +65,7 @@ body {
     background-color: #4CAF50;
     color: white;
 }
+
+.topnav p {
+    color: #f2f2f2;
+}
