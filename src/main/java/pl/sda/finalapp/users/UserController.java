@@ -15,6 +15,9 @@ public class UserController {
     @Autowired
     private RegistrationValidator registrationValidator;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/register")
     String registerForm(Model model) {
         model.addAttribute("registrationUserDto", new RegistrationUserDto());
@@ -27,7 +30,15 @@ public class UserController {
     String registerUser(@ModelAttribute RegistrationUserDto registrationUserDto, Model model) {
         Map<String, String> errorMap = registrationValidator.isValid(registrationUserDto);
         if (errorMap.isEmpty()) {
-            return "";
+            try {
+                userService.registerUser(registrationUserDto);
+            } catch (UserExistsException e) {
+                model.addAttribute("registrationUserDto", registrationUserDto);
+                model.addAttribute("countryList", Country.values());
+                model.addAttribute("userFoundMessage", e.getMessage());
+                return "registerPage";
+            }
+            return "index";
         }
         model.addAttribute("registrationUserDto", registrationUserDto);
         model.addAttribute("countryList", Country.values());

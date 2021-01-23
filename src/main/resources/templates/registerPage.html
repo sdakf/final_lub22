@@ -12,11 +12,12 @@
     <form class="form-signin" method="post" th:action="@{/register}" th:object="${registrationUserDto}">
         <label for="firstName">First name</label>
         <input class="form-control" th:field="*{firstName}" placeholder="firstName"><br/>
-        <p th:text="${firstNameError}" th:if="${firstNameError}"></p>
+        <p th:text="${firstNameError}" th:if="${firstNameError}"></p><br/>
 
         <input class="form-control"th:field="*{lastName}" placeholder="lastName"><br/>
 
         <input class="form-control"th:field="*{eMail}" placeholder="eMail"><br/>
+        <p th:if="${userFoundMessage}" th:text="${userFoundMessage}"></p><br/>
 
         <input class="form-control"th:field="*{password}" placeholder="password"><br/>
 

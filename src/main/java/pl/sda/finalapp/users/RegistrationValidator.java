@@ -14,8 +14,6 @@ public class RegistrationValidator {
         if(dto.getFirstName() == null || !dto.getFirstName().matches("^[A-Z][a-z]{2,}$")){
             errors.put("firstNameError", "Imię jest wymagane. Przynajmniej 3 znaki oraz pierwsza duża, reszta małe.");
         }
-
         return errors;
     }
-
 }
